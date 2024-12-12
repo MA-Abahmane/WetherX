@@ -1,6 +1,6 @@
-# Weather App
+# WeatherX
 
-Welcome to the **Weather App**! This app provides current weather updates and weekly forecasts using the OpenWeatherMap API. With a sleek interface and accurate data, it’s your go-to tool for planning your days.
+Welcome to my **Weather App**! This app provides current weather updates and weekly forecasts using the OpenWeatherMap API. With a sleek interface and accurate data, it’s your go-to tool for planning your days.
 
 ---
 
