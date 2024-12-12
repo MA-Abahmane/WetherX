@@ -72,8 +72,6 @@ const API_KEY = "YOUR_API_KEY";
 
 ## Screenshots
 
-Add screenshots of your app here:
-
 - **Home Page**:<br/>
 <img width="250px" src="public/pr1.png" />
 
