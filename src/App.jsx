@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchSection from "./components/SearchSection"
 import CurrentWeather from "./components/CurrentWeather"
 import HourlyWeatherItem from "./components/HourlyWeatherItem"
@@ -6,6 +6,14 @@ import HourlyWeatherItem from "./components/HourlyWeatherItem"
 const App = () => {
     const [currentWeather, setCurrentWeather] = useState({});
     const [weeklyWeather, setWeeklyWeather] = useState([]);
+    const [API_KEY, setAPI_KEY] = useState("");
+
+
+    // Get API Key from .env
+    useEffect(() => {
+        setAPI_KEY("973328026feadaa4ff54db9365885394")
+    }, [])
+
 
     const getWeather = (API_URL) => {
         // Create a new XMLHttpRequest
@@ -22,7 +30,7 @@ const App = () => {
                     let response = JSON.parse(xhr.responseText); // Parse the JSON response
                     setCurrentWeather(response);
                     getWeekWeather(response);
-                } 
+                }
                 else { // Failure response
                     console.error("Error fetching weather data:", xhr.status, xhr.statusText);
                 }
@@ -35,18 +43,20 @@ const App = () => {
 
 
     const getWeekWeather = (currentWeather) => {
-        const API_KEY = "973328026feadaa4ff54db9365885394";
-        console.log(API_KEY);
-        
-        const API_URL_W = `https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=${API_KEY}&units=metric`;
-        
+
+        let lon = currentWeather.coord.lon
+        let lat = currentWeather.coord.lat
+
+
+        const API_URL_W = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
         const response = fetch(API_URL_W)
         .then(response => response.json())
         .then(data => {
             console.log("--", data.list);
             adjustResponce(data.list)
             console.log(weeklyWeather);
-            
+
         })
         .catch(error => {
             console.error("Error fetching weather data:", error);
@@ -57,24 +67,24 @@ const App = () => {
             let date = ""
             let days
             days = data.filter((e) => {
-                let day = e.dt_txt.split(" ")[0].split("-")[2] 
+                let day = e.dt_txt.split(" ")[0].split("-")[2]
                 if (date != day) {
-                    date = e.dt_txt.split(" ")[0].split("-")[2] 
+                    date = e.dt_txt.split(" ")[0].split("-")[2]
                     return e
                 }
             })
-            
-            
+
+
             setWeeklyWeather(days);
         }
 
-    
+
 
 
 
   return (
     <div className="container">
-        <SearchSection getWeather={getWeather} />
+        <SearchSection getWeather={getWeather} API_KEY={API_KEY} />
 
         {/* The Weather Section */}
         <div className="weather-section">
@@ -87,10 +97,10 @@ const App = () => {
                     {
                         (weeklyWeather != [])
                         ? weeklyWeather.map((dayWeather) => {
-                            
+
                             return <HourlyWeatherItem dayWeather={dayWeather} />
                         })
-                        
+
                         : null
 
 

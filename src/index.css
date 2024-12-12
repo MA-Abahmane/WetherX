@@ -170,7 +170,7 @@ body {
 
 .hourly-forecast .weather-list {
     display: flex;
-    gap: 32px;
+    gap: 12px;
     overflow-x: auto;
     list-style: none;
     scrollbar-width: thin;
@@ -183,10 +183,11 @@ body {
     scrollbar-color: #c5bcdb transparent;
 }
 
-.hourly-forecast .weather-item {
+.hourly-forecast .weather-list .weather-item {
+    width: 100px;
     display: flex;
-    gap: 7px;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -199,6 +200,4 @@ body {
 .metric {
     font-size: 12px;
     margin-bottom: 20px;
-
-
 }

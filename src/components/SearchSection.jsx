@@ -1,11 +1,9 @@
 
-const SearchSection = ({getWeather}) => {
-    const API_KEY = import.meta.env.VITE_API_KEY;
+const SearchSection = ({getWeather, API_KEY}) => {
 
     const handleCitySearch = (x) => {
         x.preventDefault();
         const searchInput = x.target.querySelector(".search-input").value
-        // console.log(searchInput);
 
         const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${API_KEY}&units=metric`
             
@@ -14,6 +12,7 @@ const SearchSection = ({getWeather}) => {
 
 
     }
+
   return (
     <div className="search-section">
         {/* The Search Section */}
